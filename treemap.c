@@ -130,12 +130,28 @@ Pair * searchTreeMap(TreeMap * tree, void* key) {
 
 
 Pair * upperBound(TreeMap * tree, void* key) {
+    TreeNode *current = tree->root;
+    TreeNode *ub = NULL;
     return NULL;
 }
 
-Pair * firstTreeMap(TreeMap * tree) {
-    return NULL;
+Pair* firstTreeMap(TreeMap* tree) {
+    TreeNode* current = tree->root;
+
+    // Recorremos hacia el nodo más a la izquierda del árbol
+    while (current != NULL && current->left != NULL) {
+        current = current->left;
+    }
+
+    // Si current es NULL, el árbol está vacío
+    if (current == NULL) {
+        return NULL;
+    }
+
+    // Se retorna el primer par encontrado
+    return current->pair;
 }
+
 
 Pair * nextTreeMap(TreeMap * tree) {
     return NULL;

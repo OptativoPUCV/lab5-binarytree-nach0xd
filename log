@@ -51,3 +51,17 @@ Wed 08 May 2024 11:59:26 AM UTC:
  tests:  6|6
 total_score: 5/70
 634682c
+Wed 08 May 2024 12:04:33 PM UTC: 
+ treemap.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+In file included from test.c:4:
+treemap.c: In function ‘upperBound’:
+treemap.c:134:15: error: unused variable ‘ub’ [-Werror=unused-variable]
+  134 |     TreeNode *ub = NULL;
+      |               ^~
+treemap.c:133:15: error: unused variable ‘current’ [-Werror=unused-variable]
+  133 |     TreeNode *current = tree->root;
+      |               ^~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+a4a0c58
