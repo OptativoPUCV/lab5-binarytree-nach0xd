@@ -109,11 +109,11 @@ void removeNode(TreeMap * tree, TreeNode* node) {
 }
 
 void eraseTreeMap(TreeMap * tree, void* key){
-    if (tree == NULL || tree->root == NULL) return;
+    if (tree == NULL || tree->root == NULL) return; //Si el árbol está vacío o no existe, retornamos NULL
 
-    if (searchTreeMap(tree, key) == NULL) return;
+    if (searchTreeMap(tree, key) == NULL) return; //Si la clave no existe, retornamos NULL
     TreeNode* node = tree->current;
-    removeNode(tree, node);
+    removeNode(tree, node); //Eliminamos el nodo
 
 }
 
