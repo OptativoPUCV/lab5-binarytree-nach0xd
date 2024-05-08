@@ -37,18 +37,39 @@ TreeNode * createTreeNode(void* key, void * value) {
 }
 
 TreeMap * createTreeMap(int (*lower_than) (void* key1, void* key2)) {
-    TreeMap * new = (TreeMap *)malloc(sizeof(TreeMap));
-    new->root = NULL;
-    new->current = NULL;
-    new->lower_than = lower_than;
-    return new;
+    TreeMap * nuevoArbol = (TreeMap *)malloc(sizeof(TreeMap)); //Se crea el árbol y se reserva memoria para este
+    nuevoArbol->root = NULL; //Se asigna NULL a la raíz del árbol
+    nuevoArbol->current = NULL; //Se asigna NULL al nodo actual
+    nuevoArbol->lower_than = lower_than; //Se inicializa la función para comparar claves
+    return nuevoArbol; //Retorna el nuevo árbol
 
     //new->lower_than = lower_than;
 }
 
 
 void insertTreeMap(TreeMap * tree, void* key, void * value) {
-
+    TreeNode * nuevoNodo = createTreeNode(key, value);
+    if (tree->root == NULL){
+        tree->root = nuevoNodo;
+    }
+    else{
+        TreeNode * aux = tree->root;
+        while (aux != NULL){
+            if (tree->lower_than(key, aux->pair->key) == 1){
+                if (aux->left == NULL){
+                    nuevoNodo->parent = aux;
+                }
+                aux = aux->left;
+            }
+            else{
+                if (aux->right == NULL){
+                    nuevoNodo->parent = aux;
+                }
+                aux = aux->right;
+            }
+        }
+        
+    }
 }
 
 TreeNode * minimum(TreeNode * x){

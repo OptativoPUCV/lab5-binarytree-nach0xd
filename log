@@ -4,3 +4,9 @@ Wed 08 May 2024 02:32:28 AM UTC:
  tests:  4|7
 total_score: 5/70
 ae09d12
+Wed 08 May 2024 02:41:17 AM UTC: 
+ treemap.c | 31 ++++++++++++++++++++++++++-----
+ 1 file changed, 26 insertions(+), 5 deletions(-)
+ tests:  4|7
+total_score: 5/70
+a37a9fd
