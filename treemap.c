@@ -104,9 +104,61 @@ TreeNode * minimum(TreeNode * x){
 }
 
 
-void removeNode(TreeMap * tree, TreeNode* node) {
+void removeNode(TreeMap* tree, TreeNode* node) {
+    if (node == NULL) {
+        return;
+    }
 
+    // Caso 1: Nodo sin hijos
+    if (node->left == NULL && node->right == NULL) {
+        // Verificamos si el nodo es la raíz del árbol
+        if (node == tree->root) {
+            tree->root = NULL;
+        } else {
+            // Anulamos el puntero del padre que apuntaba al nodo
+            if (node->parent->left == node) {
+                node->parent->left = NULL;
+            } else {
+                node->parent->right = NULL;
+            }
+        }
+        free(node->pair);
+        free(node);
+    }
+    // Caso 2: Nodo con un hijo
+    else if (node->left == NULL || node->right == NULL) {
+        TreeNode* child = (node->left != NULL) ? node->left : node->right;
+
+        // Verificamos si el nodo es la raíz del árbol
+        if (node == tree->root) {
+            tree->root = child;
+            child->parent = NULL;
+        } else {
+            // El padre del nodo pasa a ser el padre de su hijo
+            if (node->parent->left == node) {
+                node->parent->left = child;
+            } else {
+                node->parent->right = child;
+            }
+            child->parent = node->parent;
+        }
+        free(node->pair);
+        free(node);
+    }
+    // Caso 3: Nodo con dos hijos
+    else {
+        // Descendemos al hijo derecho y obtenemos el menor nodo del subárbol (minimum)
+        TreeNode* successor = minimum(node->right);
+
+        // Reemplazamos los datos (clave-valor) de node con los del nodo "mínimo"
+        node->pair->key = successor->pair->key;
+        node->pair->value = successor->pair->value;
+
+        // Eliminamos el nodo "mínimo"
+        removeNode(tree, successor);
+    }
 }
+
 
 void eraseTreeMap(TreeMap * tree, void* key){
     if (tree == NULL || tree->root == NULL) return; //Si el árbol está vacío o no existe, retornamos NULL
