@@ -178,5 +178,13 @@ Pair* firstTreeMap(TreeMap* tree) {
 
 
 Pair * nextTreeMap(TreeMap * tree) {
-    return NULL;
+    TreeNode *current = tree->current;
+    //Si no existe nodo actual, retorna NULL
+    if (current == NULL){
+        return NULL;
+    }
+    //Si el actual tiene un hijo derecho, se mueve hacia allí 
+    if (current->right != NULL){
+        current = current->right;
+    }
 }
