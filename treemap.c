@@ -169,9 +169,6 @@ void eraseTreeMap(TreeMap * tree, void* key){
 
 }
 
-
-
-
 Pair* searchTreeMap(TreeMap* tree, void* key) {
     TreeNode* current = tree->root;
 
@@ -248,5 +245,30 @@ Pair* firstTreeMap(TreeMap* tree) {
 
 
 Pair * nextTreeMap(TreeMap * tree) {
-    return NULL;
+    TreeNode *current = tree->current;
+
+    //Caso 1: Si current es NULL, retornamos NULL
+    if (current == NULL){
+        return NULL;
+    }
+    //Caso 2: Si current tiene un hijo derecho
+    if (current->right != NULL){
+        tree->current = current->right;
+        while (tree->current->left != NULL){
+            tree->current = tree->current->left;
+        }
+        return tree->current->pair;
+    }
+    //Caso 3: Si current no tiene hijo derecho
+    while (current->parent != NULL && current == current->parent->right){
+        current = current->parent;
+    }
+    //Si current->parent == NULL, current es el más grande y no hay siguiente 
+    if (current->parent == NULL){
+        tree->current = NULL;
+        return NULL;
+    }
+    //Si current->parent->right != current, current->parent es el siguiente 
+    tree->current = current->parent;
+    return current->parent->pair;
 }
