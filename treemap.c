@@ -87,9 +87,14 @@ void insertTreeMap(TreeMap* tree, void* key, void* value) {
         parent->right = new_node;
     }
 
+    // Establecemos el puntero al padre del nuevo nodo
+    new_node->parent = parent;
+
     // Actualizamos current al nuevo nodo insertado
     tree->current = new_node;
 }
+
+
 
 TreeNode * minimum(TreeNode * x){
     while (x->left != NULL){ //Mientras el nodo tenga un hijo izquierdo, avanzamos
