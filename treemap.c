@@ -102,8 +102,29 @@ void eraseTreeMap(TreeMap * tree, void* key){
 
 
 Pair * searchTreeMap(TreeMap * tree, void* key) {
+    TreeNode *current = tree->root;
+
+    // Recorrido del árbol hasta llegar a un nodo nulo o encontrar la clave buscada.
+    while (current != NULL) {
+        // Comparación de la clave buscada con la clave del nodo actual.
+        int cmp = tree->lower_than(key, current->pair->key);
+
+        if (cmp < 0) {
+            // Si la clave buscada es menor, ir al subárbol izquierdo.
+            current = current->left;
+        } else if (cmp > 0) {
+            // Si la clave buscada es mayor, ir al subárbol derecho.
+            current = current->right;
+        } else {
+            // Si las claves son iguales, se ha encontrado el nodo buscado.
+            return current->pair;
+        }
+    }
+
+    // Si se llega aquí, la clave no está presente en el árbol.
     return NULL;
 }
+
 
 
 Pair * upperBound(TreeMap * tree, void* key) {
