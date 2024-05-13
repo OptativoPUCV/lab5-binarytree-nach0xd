@@ -105,6 +105,7 @@ TreeNode * minimum(TreeNode * x){
 
 
 void removeNode(TreeMap* tree, TreeNode* node) {
+    //Si el nodo es nulo, retornamos 
     if (node == NULL) {
         return;
     }
@@ -122,6 +123,7 @@ void removeNode(TreeMap* tree, TreeNode* node) {
                 node->parent->right = NULL;
             }
         }
+        //Liberamos la memoria del nodo
         free(node->pair);
         free(node);
     }
@@ -142,6 +144,7 @@ void removeNode(TreeMap* tree, TreeNode* node) {
             }
             child->parent = node->parent;
         }
+        //Liberamos la memoria del nodo
         free(node->pair);
         free(node);
     }
@@ -150,11 +153,11 @@ void removeNode(TreeMap* tree, TreeNode* node) {
         // Descendemos al hijo derecho y obtenemos el menor nodo del subárbol (minimum)
         TreeNode* successor = minimum(node->right);
 
-        // Reemplazamos los datos (clave-valor) de node con los del nodo "mínimo"
+        // Reemplazamos los datos de node con los del nodo "mínimo"
         node->pair->key = successor->pair->key;
         node->pair->value = successor->pair->value;
 
-        // Eliminamos el nodo "mínimo"
+        // Eliminamos el nodo "mínimo" de forma recursiva
         removeNode(tree, successor);
     }
 }
